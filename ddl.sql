@@ -232,19 +232,6 @@ create index diagnosis_patient_FK_2
 create index doctor_FK_1
     on doctor (department_id);
 
-create definer = root@localhost trigger check_appointment_price_is_allowed
-    before insert
-    on doctor
-    for each row
-BEGIN
-
-if new.appointment_price / new.title_id >= 4 then
-    SIGNAL SQLSTATE '45000' -- "unhandled user-defined exception"
-    SET MESSAGE_TEXT = 'Given the rank, the appointment price is too much! Set a lower price.';
-end if ;
-
-END;
-
 create table employee
 (
     staff_id      int unsigned not null
@@ -309,25 +296,6 @@ create index medical_service_FK_1
 
 create index medical_service_FK_2
     on medical_service_patient (service_type);
-
-create definer = root@localhost trigger alert_unpaid_previous_services
-    before insert
-    on medical_service_patient
-    for each row
-BEGIN
-    declare count_unpaid_previous_services bool;
-    set count_unpaid_previous_services = (
-            select count(msp.service_patient_id)
-            from medical_service_patient msp
-            where msp.patient_id = new.patient_id
-            and msp.payment_completed = 0
-        );
-
-    if count_unpaid_previous_services >= 3 then
-        SIGNAL SQLSTATE '02000' -- "Warning"
-        SET MESSAGE_TEXT = 'There are at least 3 previously unpaid services. Please pay the previous services, before we can offer our next service to you.';
-    end if ;
-END;
 
 create table nurse
 (
