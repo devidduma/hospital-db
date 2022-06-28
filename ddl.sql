@@ -143,6 +143,9 @@ create table patient_room_stationary
         primary key,
     room_id    int unsigned not null,
     branch_id  int unsigned not null,
+    constraint patient_room_stationary_FK_patient_id
+        foreign key (patient_id) references patient (patient_id)
+            on delete cascade,
     constraint stationary_patients_room_FK_room_id_branch_id
         foreign key (room_id, branch_id) references room (room_id, branch_id)
             on update cascade
@@ -318,13 +321,14 @@ create index nurse_FK_1
 
 create table receptionist
 (
-    staff_id      int unsigned not null
+    staff_id     int unsigned not null
         primary key,
-    department_id int unsigned not null,
-    graduated_in  varchar(100) not null,
-    constraint receptionist_FK_department_id
-        foreign key (department_id) references department (department_id)
-            on update cascade,
+    graduated_in varchar(100) not null,
+    room_id      int unsigned not null,
+    branch_id    int unsigned not null,
+    constraint receptionist_FK_room
+        foreign key (room_id, branch_id) references room (room_id, branch_id)
+            on delete cascade,
     constraint receptionist_FK_staff_id
         foreign key (staff_id) references staff (staff_id)
             on update cascade on delete cascade

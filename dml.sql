@@ -1,5 +1,3 @@
-SET FOREIGN_KEY_CHECKS=0;
-
 INSERT INTO hospital.appointment (booking_datetime,assigned_to,booked_by,due_datetime,payment_completed) VALUES
 	 ('2022-07-19 15:00:34',2,1,'2022-07-30 12:00:00',0),
 	 ('2022-07-12 12:04:30',2,2,'2022-07-30 13:00:00',0),
@@ -345,16 +343,16 @@ INSERT INTO hospital.patient_info (middle_name,id_personal_number,mobile,email,p
 	 (21,105,2),
 	 (2,201,1),
 	 (20,201,3),
-	 (4,301,1);INSERT INTO hospital.receptionist (staff_id,department_id,graduated_in) VALUES
-	 (31,4,'Social Sciences'),
-	 (32,1,'Computer Engineering'),
-	 (33,2,'Business Administration'),
-	 (34,1,'Information Technology'),
-	 (35,2,'Psychology'),
-	 (36,4,'Public Health'),
-	 (37,4,'Human Services'),
-	 (38,2,'Economics'),
-	 (39,1,'Applied Technology Managment');INSERT INTO hospital.room (last_renovated,branch_id,department_id) VALUES
+	 (4,301,1);INSERT INTO hospital.receptionist (staff_id,graduated_in,room_id,branch_id) VALUES
+	 (31,'Social Sciences',101,1),
+	 (32,'Computer Engineering',201,1),
+	 (33,'Business Administration',301,1),
+	 (34,'Information Technology',101,2),
+	 (35,'Psychology',201,2),
+	 (36,'Public Health',204,2),
+	 (37,'Human Services',101,3),
+	 (38,'Economics',102,3),
+	 (39,'Applied Technology Managment',202,3);INSERT INTO hospital.room (last_renovated,branch_id,department_id) VALUES
 	 ('2022-01-15',1,1),
 	 ('2018-04-01',2,1),
 	 ('2015-04-01',3,1),
@@ -438,5 +436,3 @@ INSERT INTO hospital.staff (first_name,second_name,middle_name,employed_since,sa
 	 ('Sara','Lyons','Darlene','2018-10-01',80000,'1979-04-13');
 INSERT INTO hospital.staff (first_name,second_name,middle_name,employed_since,salary,date_of_birth) VALUES
 	 ('Kristin','Greer','Wilhelm','2017-02-01',80000,'1980-08-10');
-
-SET FOREIGN_KEY_CHECKS=1;
