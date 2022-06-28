@@ -1,6 +1,6 @@
 /* Show most important information on patient. */
 
-select patient.patient_id,
+select distinct patient.patient_id,
        name,
        surname,
        middle_name,

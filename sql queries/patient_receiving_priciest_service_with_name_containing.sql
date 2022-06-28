@@ -1,9 +1,9 @@
 /* Show patient information on patient receiving the priciest Stenting service. */
 
 select patient.patient_id, id_personal_number, name, surname
-from patient_info, patient
-where patient.patient_id = patient_info.patient_id
-    and patient.patient_id in
+from patient_info join patient
+on patient.patient_id = patient_info.patient_id
+where patient.patient_id in
       (select patient_id from medical_service_patient
                           where service_type in
                                 (select service_type_id from medical_service_type
