@@ -6,3 +6,5 @@ A well-designed database system can be helpful in building a management software
 The project contains:
 -	22 entities, including 6 weak entities and 1 associative entity
 -	28 relationships
+
+Read [Report.pdf](Report.pdf) for more details.
